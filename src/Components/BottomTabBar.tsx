@@ -1,12 +1,13 @@
 import { APP_NAVIGATION } from '@/Constants';
 import { navigate } from '@/Navigators/NavigationUtils';
-import { CommonColors, Layout, ResponsiveStyleSheet } from '@/Theme';
+import { CommonColors, Layout, ResponsiveStyleSheet, screenWidth } from '@/Theme';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import React, { useCallback, useMemo } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Padding from './Padding';
 import { HeartSvg, HomeSvg, SearchSvg } from '@/Assets/Svgs';
+import Svg, { Path } from 'react-native-svg';
 
 const BottomTabBar = ({ state }: BottomTabBarProps) => {
   const tabBars = useMemo(
@@ -18,17 +19,17 @@ const BottomTabBar = ({ state }: BottomTabBarProps) => {
         index: 0,
       },
       {
-        name: 'Search',
+        name: 'Browse',
         icon: SearchSvg,
         routeName: APP_NAVIGATION.SEARCH,
         index: 1,
       },
       {
-        name: 'Create',
+        name: 'Sell',
         // icon: PlusCircleSvg,
       },
       {
-        name: 'Notification',
+        name: 'Shop',
         icon: HeartSvg,
         routeName: APP_NAVIGATION.NOTIFICATION,
         index: 2,
@@ -55,7 +56,7 @@ const BottomTabBar = ({ state }: BottomTabBarProps) => {
     (tab: any) => {
       return (
         <React.Fragment key={tab.name}>
-          {tab.name !== 'Create' ? (
+          {tab.name !== 'Sell' ? (
             <TouchableOpacity
               activeOpacity={0.8}
               style={[Layout.fill, Layout.center]}
@@ -70,7 +71,9 @@ const BottomTabBar = ({ state }: BottomTabBarProps) => {
               <Text>{tab.name}</Text>
             </TouchableOpacity>
           ) : (
-            <Padding horizontal={16}>{/* <CreateButton /> */}</Padding>
+            <Padding horizontal={16}>
+              <Text style={{ marginTop: 28 }}>{tab.name}</Text>
+            </Padding>
           )}
         </React.Fragment>
       );
@@ -78,17 +81,48 @@ const BottomTabBar = ({ state }: BottomTabBarProps) => {
     [state.index],
   );
   const { bottom } = useSafeAreaInsets();
+  const tabBarHeight = 86;
+  const middleIconSize = 56;
+  const midRadius = 28;
+  const midBoundary = 68;
+  const path = [
+    'M0 0',
+    `H${screenWidth / 2 - midBoundary / 2} `,
+    `A 10 10 0 0 0 ${screenWidth / 2 + midBoundary / 2} 0`,
+    `H${screenWidth}`,
+    `V${tabBarHeight}`,
+    'H0',
+    `z`,
+  ].join(',');
+
+  const linePath = [
+    'M0 0',
+    `H${screenWidth / 2 - midBoundary / 2}`,
+    `A 10 10 0 0 0 ${screenWidth / 2 + midBoundary / 2} 0`,
+    `H${screenWidth}`,
+  ].join(',');
   return (
     <View style={styles.rootView}>
+      <Svg
+        style={styles.rootView}
+        viewBox={`0 0 ${screenWidth} ${tabBarHeight}`}
+        height={tabBarHeight}
+        width={screenWidth}>
+        {/* <Path d={linePath} fill="transparent" /> */}
+        <Path d={path} fill="#fff" stroke={'#ccc'} strokeWidth={0.5} />
+      </Svg>
       <View
-        style={[
-          styles.tabBarView,
-          {
-            // height: 80 + (bottom > 0 ? 10 : 0),
-          },
-        ]}>
-        {tabBars.map(renderTabItem)}
-      </View>
+        style={{
+          position: 'absolute',
+          width: middleIconSize,
+          height: middleIconSize,
+          borderRadius: midRadius,
+          backgroundColor: 'red',
+          left: screenWidth / 2 - midRadius,
+          bottom: tabBarHeight - midRadius,
+        }}
+      />
+      <View style={[styles.tabBarView, {}]}>{tabBars.map(renderTabItem)}</View>
     </View>
   );
 };
@@ -101,14 +135,14 @@ const styles = ResponsiveStyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    backgroundColor: CommonColors.kFF7A51,
-    zIndex: 99,
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
+    // backgroundColor: CommonColors.kFF7A51,
+    // zIndex: 99,
+    // borderTopLeftRadius: 30,
+    // borderTopRightRadius: 30,
   },
   tabBarView: {
     flexDirection: 'row',
-    height: 80,
+    height: 86,
     alignItems: 'center',
     justifyContent: 'space-around',
   },
