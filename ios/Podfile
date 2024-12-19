@@ -23,6 +23,8 @@ target 'RnBase' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
+  pod 'SVProgressHUD', :git => 'https://github.com/SVProgressHUD/SVProgressHUD.git'
+
   target 'RnBaseTests' do
     inherit! :complete
     # Pods for testing
