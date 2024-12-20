@@ -9,15 +9,12 @@ export enum AUTH_NAVIGATION {
 
 export enum APP_NAVIGATION {
   HOME = '[APP] HOME',
-  SEARCH = '[APP] SEARCH',
-  CREATE = '[APP] CREATE',
-  NOTIFICATION = '[APP] NOTIFICATION',
+  BROWSE = '[APP] BROWSE',
+  SELL = '[APP] SELL',
+  SHOP = '[APP] SHOP',
   PROFILE = '[APP] PROFILE',
-  COMMENT = '[APP] COMMENT',
-  CHAT = '[APP] CHAT',
-  MEDIA = '[APP] MEDIA',
 }
 
 export enum HOME_NAVIGATION {
-  NEW_FEED = '[HOME] NEW_FEED',
+  HOME = '[HOME] HOME',
 }

@@ -6,22 +6,23 @@ import React, { useCallback, useMemo } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Padding from './Padding';
-import { BackgroundSvg, HeartSvg, HomeSvg, SearchSvg } from '@/Assets/Svgs';
+import { BackgroundSvg, HomeBottomTabSvg, ProfileSvg, SearchBottomTabSvg, SellSvg, ShopSvg } from '@/Assets/Svgs';
 import AppText from './AppText';
+import LinearGradient from 'react-native-linear-gradient';
 
 const BottomTabBar = ({ state }: BottomTabBarProps) => {
   const tabBars = useMemo(
     () => [
       {
         name: 'Home',
-        icon: HomeSvg,
+        icon: HomeBottomTabSvg,
         routeName: APP_NAVIGATION.HOME,
         index: 0,
       },
       {
         name: 'Browse',
-        icon: SearchSvg,
-        routeName: APP_NAVIGATION.SEARCH,
+        icon: SearchBottomTabSvg,
+        routeName: APP_NAVIGATION.BROWSE,
         index: 1,
       },
       {
@@ -30,23 +31,14 @@ const BottomTabBar = ({ state }: BottomTabBarProps) => {
       },
       {
         name: 'Shop',
-        icon: HeartSvg,
-        routeName: APP_NAVIGATION.NOTIFICATION,
+        icon: ShopSvg,
+        routeName: APP_NAVIGATION.BROWSE,
         index: 2,
       },
       {
         name: 'Profile',
-        icon: HeartSvg,
-        // icon: ({ color, ...restProps }) => (
-        //   <AppImage
-        //     {...restProps}
-        //     containerStyle={[styles.avatar, { borderColor: color }]}
-        //     source={{
-        //       uri: userStore?.userInfo?.avatar_url || 'https://picsum.photos/200/300',
-        //     }}
-        //   />
-        // ),
-        routeName: APP_NAVIGATION.NOTIFICATION,
+        icon: ProfileSvg,
+        routeName: APP_NAVIGATION.BROWSE,
         index: 3,
       },
     ],
@@ -65,10 +57,13 @@ const BottomTabBar = ({ state }: BottomTabBarProps) => {
                 <tab.icon
                   onPress={() => navigate(tab.routeName)}
                   size={24}
-                  color={tab.index === state.index ? CommonColors.primary : CommonColors.white}
+                  fill={tab.index === state.index ? CommonColors.green : 'none'}
+                  color={tab.index === state.index ? CommonColors.green : CommonColors.lightGray}
                 />
               )}
-              <AppText color={CommonColors.lightGray}>{tab.name}</AppText>
+              <AppText color={tab.index === state.index ? CommonColors.green : CommonColors.lightGray} fontSize={12}>
+                {tab.name}
+              </AppText>
             </TouchableOpacity>
           ) : (
             <Padding horizontal={16}>
@@ -90,17 +85,23 @@ const BottomTabBar = ({ state }: BottomTabBarProps) => {
   return (
     <View style={styles.rootView}>
       <BackgroundSvg style={styles.rootView} />
-      <View
+
+      <LinearGradient
+        colors={['#009245', '#7BC040']}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
         style={{
           position: 'absolute',
           width: middleIconSize,
           height: middleIconSize,
           borderRadius: midRadius,
-          backgroundColor: 'red',
           left: screenWidth / 2 - midRadius,
           bottom: tabBarHeight - midRadius,
-        }}
-      />
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
+        <SellSvg />
+      </LinearGradient>
       <View style={[styles.tabBarView, {}]}>{tabBars.map(renderTabItem)}</View>
     </View>
   );
@@ -114,10 +115,6 @@ const styles = ResponsiveStyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    // backgroundColor: CommonColors.kFF7A51,
-    // zIndex: 99,
-    // borderTopLeftRadius: 30,
-    // borderTopRightRadius: 30,
   },
   tabBarView: {
     flexDirection: 'row',

@@ -6,13 +6,11 @@ import HomeNavigator from './HomeNavigator';
 import { APP_NAVIGATION } from '@/Constants';
 import { Layout } from '@/Theme';
 import BottomTabBar from '@/Components/BottomTabBar';
+import { BrowseScreen } from '@/Screens';
 
 export type TabBottomStackParam = {
   [APP_NAVIGATION.HOME]: undefined;
-  [APP_NAVIGATION.SEARCH]: undefined;
-  [APP_NAVIGATION.NOTIFICATION]: undefined;
-  [APP_NAVIGATION.PROFILE]: undefined;
-  [APP_NAVIGATION.MEDIA]: { uri: string; mimeType: 'video' | 'audio' | 'image' };
+  [APP_NAVIGATION.BROWSE]: undefined;
 };
 // tabBarVisible: false no longer exists on v6 but you can use tabBarStyle: { display: 'none' } instead. I found out here
 
@@ -25,6 +23,7 @@ const AppBottomTab = () => {
     <View style={[Layout.fill]}>
       <Tab.Navigator tabBar={props => <BottomTabBar {...props} />} screenOptions={screenOptions}>
         <Tab.Screen name={APP_NAVIGATION.HOME} component={HomeNavigator} />
+        <Tab.Screen name={APP_NAVIGATION.BROWSE} component={BrowseScreen} />
       </Tab.Navigator>
     </View>
   );

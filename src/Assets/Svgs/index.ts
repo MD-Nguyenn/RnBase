@@ -6,6 +6,11 @@ export { default as AddConversationSvg } from './AddConversationSvg';
 
 // BottomTab icons
 export { default as BackgroundSvg } from './BottomTab/BackgroundSvg';
+export { default as HomeBottomTabSvg } from './BottomTab/HomeBottomTabSvg';
+export { default as SearchBottomTabSvg } from './BottomTab/SearchSvg';
+export { default as SellSvg } from './BottomTab/SellSvg';
+export { default as ShopSvg } from './BottomTab/ShopSvg';
+export { default as ProfileSvg } from './BottomTab/ProfileSvg';
 
 // Used to MessengerBottomTab
 export { default as ChatSvg } from './MessengerBottomTab/ChatSvg';
