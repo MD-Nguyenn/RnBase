@@ -6,7 +6,7 @@ export const styles = ResponsiveStyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: Spacing.xl,
-    backgroundColor: '#fff',
+    backgroundColor: '#e0e0e0',
   },
   btnLogout: {
     borderWidth: 1,
