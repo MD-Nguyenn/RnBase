@@ -1,9 +1,9 @@
-import {AppFonts, CommonColors, FontSizes, Layout, Spacing} from '@/Theme';
-import React, {forwardRef, memo} from 'react';
-import {StyleProp, TextInput, TextInputProps, TextStyle} from 'react-native';
-import {ScaledSheet, ms, s} from 'react-native-size-matters';
+import { AppFonts, CommonColors, FontSizes, Layout, Spacing } from '@/Theme';
+import React, { forwardRef, memo } from 'react';
+import { StyleProp, TextInput, TextInputProps, TextStyle } from 'react-native';
+import { ScaledSheet, ms, s } from 'react-native-size-matters';
 import AppText from './AppText';
-import {Control, Controller, FieldValues, RegisterOptions} from 'react-hook-form';
+import { Control, Controller, FieldValues, RegisterOptions } from 'react-hook-form';
 
 const View = require('react-native/Libraries/Components/View/ViewNativeComponent').default;
 
@@ -62,7 +62,7 @@ const AppInput = forwardRef(
       ...(lineHeightRatio && {
         lineHeight: ms(size * lineHeightRatio),
       }),
-      ...(lineHeight && {lineHeight: ms(lineHeight)}),
+      ...(lineHeight && { lineHeight: ms(lineHeight) }),
       textAlign: align,
       margin: 0,
       padding: 0,
@@ -84,15 +84,15 @@ const AppInput = forwardRef(
           <Controller
             control={control}
             rules={rules}
-            render={({field: {onChange, onBlur, value}, fieldState: {error}}) => (
+            render={({ field: { onChange, onBlur, value }, fieldState: { error } }) => (
               <>
                 <View
                   style={[
                     styles.base,
                     style,
-                    !!error?.message && {borderColor: CommonColors.error},
+                    !!error?.message && { borderColor: CommonColors.error },
                     !editable && styles.disable,
-                    {height},
+                    { height },
                   ]}>
                   <TextInput
                     autoCapitalize="none"
@@ -110,13 +110,13 @@ const AppInput = forwardRef(
                       textStyles,
                       !editable && styles.disable,
                       multiline && styles.multiline,
-                      {height},
+                      { height },
                     ]}
                     editable={editable}
                     autoCorrect={false}
                     spellCheck={false}
                     onEndEditing={e => {
-                      const {text} = e.nativeEvent;
+                      const { text } = e.nativeEvent;
                       onChange(text?.trim() ?? '');
                     }}
                   />
@@ -127,7 +127,7 @@ const AppInput = forwardRef(
             name={name}
           />
         ) : (
-          <View style={[styles.base, style, !editable && styles.disable, {height}]}>
+          <View style={[styles.base, style, !editable && styles.disable, { height }]}>
             <TextInput
               autoCapitalize="none"
               multiline={multiline}
@@ -136,7 +136,7 @@ const AppInput = forwardRef(
               placeholderTextColor={placeholderTextColor}
               ref={ref}
               {...restProps}
-              style={[Layout.fill, textStyles, !editable && styles.disable, multiline && styles.multiline, {height}]}
+              style={[Layout.fill, textStyles, !editable && styles.disable, multiline && styles.multiline, { height }]}
               editable={editable}
               autoCorrect={false}
               spellCheck={false}
@@ -153,14 +153,14 @@ export default memo(AppInput);
 const styles = ScaledSheet.create({
   base: {
     color: CommonColors.mainDark,
-    backgroundColor: CommonColors.kF9F9F9,
-    borderRadius: 4,
+    backgroundColor: CommonColors.lightGray3,
+    borderRadius: 6,
     paddingHorizontal: s(Spacing.xs),
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    borderColor: CommonColors.mainDark,
-    borderWidth: 1,
+    // borderColor: CommonColors.mainDark,
+    // borderWidth: 1,
   },
 
   wrapper: {
@@ -172,7 +172,7 @@ const styles = ScaledSheet.create({
 
   disable: {
     backgroundColor: CommonColors.kC0C0C0,
-    color: CommonColors.k939393,
+    color: CommonColors.E8E8E8,
   },
 
   errorMessage: {

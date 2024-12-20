@@ -20,55 +20,50 @@ const LoginScreen = (props: ILoginProps) => {
   const { control, handleSubmit } = useForm<ILoginFormData>({
     defaultValues: { email: '', password: '' },
   });
-  
+
   const signIn = (data: ILoginFormData) => {
     //Mock action to call api login
     onGlobalLoading();
     setTimeout(() => {
       //set token here
-      const token = 'token_here'
+      const token = 'token_here';
       storage.set(STORAGE_KEYS.TOKEN, token);
       offGlobalLoading();
     }, 1000);
   };
   return (
     <Container>
-        <AppText fontSize={FontSizes.h2} fontWeight={400} align="center">
-          {trans('auth.signIn')}
-        </AppText>
-        <Padding vertical={Spacing.xl} />
-        <AppInput
-          control={control} 
-          label={trans('auth.email')}
-          placeholder={Placeholders.emailPhonenumber}
-          name="email"
-        />
-        <Padding top={Spacing.s} />
-        <AppInput
-          secureTextEntry
-          label={trans('auth.password')}
-          control={control}
-          name="password"
-          rules={{
-            validate: (v: string) => {
-              if (v.trim().length === 0) {
-                return ValidationError.required;
-              }
-              return true;
-            },
-          }}
-        />
+      <AppText fontSize={FontSizes.h2} fontWeight={400} align="center">
+        {trans('auth.signIn')}
+      </AppText>
+      <Padding vertical={Spacing.xl} />
+      <AppInput
+        control={control}
+        label={trans('auth.email')}
+        placeholder={Placeholders.emailPhonenumber}
+        name="email"
+      />
+      <Padding top={Spacing.s} />
+      <AppInput
+        secureTextEntry
+        label={trans('auth.password')}
+        control={control}
+        name="password"
+        rules={{
+          validate: (v: string) => {
+            if (v.trim().length === 0) {
+              return ValidationError.required;
+            }
+            return true;
+          },
+        }}
+      />
 
-        <Padding top={Spacing.xl} />
+      <Padding top={Spacing.m} />
 
-        <Box row align="center" justify="center">
-          <AppButton
-            text={trans('auth.signIn')}
-            textSize={FontSizes.regular}
-            onPress={handleSubmit(signIn)}
-            textColor={CommonColors.mainDark}
-          />
-        </Box>
+      <Box row align="center" justify="center">
+        <AppButton fullWidth text={trans('auth.signIn')} textSize={FontSizes.regular} onPress={handleSubmit(signIn)} />
+      </Box>
     </Container>
   );
 };

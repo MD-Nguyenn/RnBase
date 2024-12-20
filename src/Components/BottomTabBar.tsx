@@ -3,11 +3,11 @@ import { navigate } from '@/Navigators/NavigationUtils';
 import { CommonColors, Layout, ResponsiveStyleSheet, screenWidth } from '@/Theme';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import React, { useCallback, useMemo } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Padding from './Padding';
-import { HeartSvg, HomeSvg, SearchSvg } from '@/Assets/Svgs';
-import Svg, { Path } from 'react-native-svg';
+import { BackgroundSvg, HeartSvg, HomeSvg, SearchSvg } from '@/Assets/Svgs';
+import AppText from './AppText';
 
 const BottomTabBar = ({ state }: BottomTabBarProps) => {
   const tabBars = useMemo(
@@ -68,11 +68,13 @@ const BottomTabBar = ({ state }: BottomTabBarProps) => {
                   color={tab.index === state.index ? CommonColors.primary : CommonColors.white}
                 />
               )}
-              <Text>{tab.name}</Text>
+              <AppText color={CommonColors.lightGray}>{tab.name}</AppText>
             </TouchableOpacity>
           ) : (
             <Padding horizontal={16}>
-              <Text style={{ marginTop: 28 }}>{tab.name}</Text>
+              <AppText color={CommonColors.lightGray} style={{ marginTop: 28 }}>
+                {tab.name}
+              </AppText>
             </Padding>
           )}
         </React.Fragment>
@@ -84,33 +86,10 @@ const BottomTabBar = ({ state }: BottomTabBarProps) => {
   const tabBarHeight = 86;
   const middleIconSize = 56;
   const midRadius = 28;
-  const midBoundary = 68;
-  const path = [
-    'M0 0',
-    `H${screenWidth / 2 - midBoundary / 2} `,
-    `A 10 10 0 0 0 ${screenWidth / 2 + midBoundary / 2} 0`,
-    `H${screenWidth}`,
-    `V${tabBarHeight}`,
-    'H0',
-    `z`,
-  ].join(',');
 
-  const linePath = [
-    'M0 0',
-    `H${screenWidth / 2 - midBoundary / 2}`,
-    `A 10 10 0 0 0 ${screenWidth / 2 + midBoundary / 2} 0`,
-    `H${screenWidth}`,
-  ].join(',');
   return (
     <View style={styles.rootView}>
-      <Svg
-        style={styles.rootView}
-        viewBox={`0 0 ${screenWidth} ${tabBarHeight}`}
-        height={tabBarHeight}
-        width={screenWidth}>
-        {/* <Path d={linePath} fill="transparent" /> */}
-        <Path d={path} fill="#fff" stroke={'#ccc'} strokeWidth={0.5} />
-      </Svg>
+      <BackgroundSvg style={styles.rootView} />
       <View
         style={{
           position: 'absolute',

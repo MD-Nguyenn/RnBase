@@ -13,3 +13,4 @@ export { default as Switch } from './Switch';
 export { default as AppImage } from './AppImage';
 export { default as Spacer } from './Spacer';
 export { default as HiddenView } from './HiddenView';
+export { default as ToastMessage } from './ToastMessage';

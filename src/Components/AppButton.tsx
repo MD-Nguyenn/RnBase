@@ -1,4 +1,4 @@
-import React, {memo, useRef} from 'react';
+import React, { memo, useRef } from 'react';
 import {
   Image,
   ImageSourcePropType,
@@ -9,8 +9,8 @@ import {
   TouchableOpacity,
   ViewStyle,
 } from 'react-native';
-import AppText, {AppTextProps} from './AppText';
-import {ScaledSheet} from 'react-native-size-matters';
+import AppText, { AppTextProps } from './AppText';
+import { ScaledSheet } from 'react-native-size-matters';
 import Spacer, { SpacerMode } from './Spacer';
 import { CommonColors } from '@/Theme';
 
@@ -41,14 +41,15 @@ export interface AppButtonProps {
   shadowSize?: number;
   center?: boolean;
   variant?: 'primary' | 'secondary';
+  fullWidth?: boolean;
 }
 
 const AppButton = ({
-  radius = 8,
-  backgroundColor = CommonColors.background,
+  radius = 6,
+  backgroundColor = CommonColors.green,
   disabled,
-  disabledBackgroundColor = CommonColors.k8E8E8E,
-  disabledTextColor = CommonColors.white,
+  disabledBackgroundColor = CommonColors.E8E8E8,
+  disabledTextColor = CommonColors.lightGray,
   icon,
   svgIcon,
   iconStyle,
@@ -66,6 +67,7 @@ const AppButton = ({
   textSize = 16,
   textWeight = 400,
   textLineHeight = 24,
+  fullWidth = false,
   ...restProps
 }: AppButtonProps) => {
   const styles = ScaledSheet.create({
@@ -98,7 +100,7 @@ const AppButton = ({
     <TouchableOpacity
       {...restProps}
       disabled={disabled}
-      style={[styles.baseBtn, style]}
+      style={[styles.baseBtn, style, fullWidth && { flex: 1 }]}
       activeOpacity={opacity}
       onPress={() => {
         if (Date.now() - lastTime.current > 1500) {

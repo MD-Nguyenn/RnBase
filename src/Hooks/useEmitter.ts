@@ -3,6 +3,7 @@ import { DeviceEventEmitter } from 'react-native';
 
 export enum EDeviceEmitter {
   GLOBAL_LOADING = 'GLOBAL_LOADING',
+  SHOW_TOAST = 'SHOW_TOAST',
 }
 
 export const emitter = <T>(type: EDeviceEmitter, param?: T) => {
